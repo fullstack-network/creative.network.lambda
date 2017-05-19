@@ -2,12 +2,7 @@ const AWS = require("aws-sdk");
 const Sharp = require("sharp");
 
 exports.handler = (event, context, callback) => {
-  const local = true;
-
-  const s3 = new AWS.S3({
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  });
+  const s3 = new AWS.S3();
 
   const bucketName = "creative-network-uploads";
   let key = event.queryStringParameters.key;
@@ -19,8 +14,6 @@ exports.handler = (event, context, callback) => {
   const height = parseInt(m[4], 10);
   const imageName= m[5];
   const extension = m[6];
-
-  console.log(key);
 
   key = key.replace(extension, "png");
 
